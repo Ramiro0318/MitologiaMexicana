@@ -1,0 +1,146 @@
+﻿
+@{
+    Layout = "Layout";
+}
+<main>
+    <section class="dioses-codice">
+        <h2>Panteón de Dioses</h2>
+
+        <div class="civilizacion-links">
+            <p>Selecciona una civilización para explorar sus deidades:</p>
+            <div class="links-container">
+                <a href="dioses.html?civilizacion=mexicas" class="civilizacion-link active">Mexicas</a>
+                <a href="dioses.html?civilizacion=mayas" class="civilizacion-link">Mayas</a>
+                <a href="dioses.html?civilizacion=olmecas" class="civilizacion-link">Olmecas</a>
+            </div>
+        </div>
+
+        <div class="decorative-border"></div>
+
+        <div class="dioses-gallery">
+            <div class="dios-item" data-dios-id="1">
+                <div class="dios-mini">
+                    <img src="imagenes/quetzalcoatl_estatua.png" alt="Quetzalcóatl">
+                    <span>Quetzalcóatl</span>
+                </div>
+            </div>
+
+            <div class="dios-item" data-dios-id="2">
+                <div class="dios-mini">
+                    <img src="imagenes/tezcatlipoca_estatua.png" alt="Tezcatlipoca">
+                    <span>Tezcatlipoca</span>
+                </div>
+            </div>
+
+            <div class="dios-item" data-dios-id="3">
+                <div class="dios-mini">
+                    <img src="imagenes/huitzilopochtli_estatua.png" alt="Huitzilopochtli">
+                    <span>Huitzilopochtli</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="detalles-container">
+            <div class="ningun-dios">
+                <p>Selecciona una civilización y haz clic en un dios para ver sus detalles</p>
+            </div>
+
+            <div class="dios-detalles" data-dios-id="1">
+                <div class="detalles-superior">
+                    <img src="imagenes/quetzalcoatl.png" alt="Quetzalcóatl" class="dios-imagen-grande">
+                    <div class="dios-info">
+                        <h3>Quetzalcóatl</h3>
+                        <p><strong>Civilización:</strong> Mexica</p>
+                        <p><strong>Género:</strong> Masculino</p>
+                        <p><strong>Dominio:</strong> Viento, sabiduría, vida</p>
+                        <p><strong>Representación:</strong> Serpiente emplumada</p>
+                    </div>
+                </div>
+                <div class="detalles-inferior">
+                    <div class="dios-descripcion">
+                        <p>Quetzalcóatl, cuyo nombre significa "serpiente emplumada", era una de las deidades más importantes de la cultura mesoamericana. Representaba la dualidad inherente a la condición humana: la "serpiente" es cuerpo físico con sus limitaciones, y las "plumas" son los principios espirituales.</p>
+                        <p>Era considerado el dios de los vientos y la lluvia, y también el creador del mundo y la humanidad. Además, era el patrono de los sacerdotes y el protector de los artesanos y orfebres.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dios-detalles" data-dios-id="2">
+                <div class="detalles-superior">
+                    <img src="imagenes/Tezcatlipoca.png" alt="Tezcatlipoca" class="dios-imagen-grande">
+                    <div class="dios-info">
+                        <h3>Tezcatlipoca</h3>
+                        <p><strong>Civilización:</strong> Mexica</p>
+                        <p><strong>Género:</strong> Masculino</p>
+                        <p><strong>Dominio:</strong> Noche, destino, magia</p>
+                        <p><strong>Representación:</strong> Espejo humeante</p>
+                    </div>
+                </div>
+                <div class="detalles-inferior">
+                    <div class="dios-descripcion">
+                        <p>Tezcatlipoca, cuyo nombre significa "espejo humeante", era una deidad central en la religión mexica. Era asociado con una amplia gama de conceptos incluyendo la noche, el cielo, la tentación, la guerra, el conflicto y el destino.</p>
+                        <p>Era considerado un dios omnipotente, capaz de conocer los pensamientos y los corazones de las personas. Se le representaba con un espejo de obsidiana en el pie, que sustituía el que había perdido en una lucha con el monstruo de la tierra.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dios-detalles" data-dios-id="3">
+                <div class="detalles-superior">
+                    <img src="imagenes/Huitzilopochtli.png" alt="Huitzilopochtli" class="dios-imagen-grande">
+                    <div class="dios-info">
+                        <h3>Huitzilopochtli</h3>
+                        <p><strong>Civilización:</strong> Mexica</p>
+                        <p><strong>Género:</strong> Masculino</p>
+                        <p><strong>Dominio:</strong> Guerra, sol</p>
+                        <p><strong>Representación:</strong> Colibrí zurdo</p>
+                    </div>
+                </div>
+                <div class="detalles-inferior">
+                    <div class="dios-descripcion">
+                        <p>Huitzilopochtli, cuyo nombre significa "colibrí zurdo", era la deidad patrona de los mexicas y dios de la guerra y el sol. Según la mitología, nació adulto y fully armado de su madre Coatlicue.</p>
+                        <p>Era el dios que guió a los mexicas durante su migración desde Aztlán hasta el Valle de México. Se le representaba como un guerrero con plumas de colibrí y portando una serpiente de fuego.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="decorative-border"></div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const detallesContainer = document.querySelector('.detalles-container');
+        const diosesGallery = document.querySelector('.dioses-gallery');
+        const ningunDios = document.querySelector('.ningun-dios');
+        const detallesDioses = document.querySelectorAll('.dios-detalles');
+
+        function inicializarDetalles() {
+            detallesDioses.forEach(detalle => {
+                detalle.style.display = 'none';
+            });
+            ningunDios.style.display = 'block';
+        }
+
+        inicializarDetalles();
+
+        diosesGallery.addEventListener('click', function (e) {
+            const diosItem = e.target.closest('.dios-item');
+
+            if (diosItem) {
+                const diosId = diosItem.getAttribute('data-dios-id');
+
+                detallesDioses.forEach(detalle => {
+                    detalle.style.display = 'none';
+                });
+                ningunDios.style.display = 'none';
+
+                const detalles = document.querySelector(`.dios-detalles[data-dios-id="${diosId}"]`);
+                if (detalles) {
+                    detalles.style.display = 'block';
+                }
+            }
+        });
+
+
+    });
+</script>

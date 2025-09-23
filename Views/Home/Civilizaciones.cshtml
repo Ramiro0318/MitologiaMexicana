@@ -1,0 +1,60 @@
+﻿@model Mitologia.Models.ViewModels.CivilizacionesViewModel
+@{
+    Layout = "Layout";
+}
+<main>
+    <section class="civilizaciones-codice">
+        <h2>Explora las Civilizaciones</h2>
+        <p>Haz clic en cada civilización para conocer su historia y cultura.</p>
+
+        <div class="decorative-border"></div>
+
+        <div class="cards-grid">
+
+            @foreach (var civ in Model.Civilizaciones)
+            {
+                <div class="card">
+                    <img src="~/imagenes/@(civ.Nombre).jpg" alt="@civ.Nombre">
+                    <div class="card-body">
+                        <h3>@civ.Nombre</h3>
+                        <button class="btn-toggle-info"><i class="fa-solid fa-chevron-down"></i> Información</button>
+                        <div class="card-info">
+                            <p><strong>Periodo:</strong>@civ.Periodo</p>
+                            <p><strong>Región:</strong>@civ.Region</p>
+                            <p><strong>Capital:</strong>@civ.Capital</p>
+                            <p><strong>Lengua:</strong>@civ.Lengua</p>
+                            <p><strong>Descripción:</strong>@civ.Descripcion</p>
+                            <a href="~/Home/Dioses?civilizacion=/@civ.Nombre" class="btn-dioses">Ver dioses</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Más cards según la base de datos -->
+        </div>
+
+        <div class="decorative-border"></div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('.btn-toggle-info');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const icon = btn.querySelector('i');
+                const info = btn.nextElementSibling;
+
+                if (info.style.display === 'block') {
+                    info.style.display = 'none';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    info.style.display = 'block';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+    });
+</script>

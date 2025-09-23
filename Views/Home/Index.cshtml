@@ -1,0 +1,32 @@
+﻿@model Mitologia.Models.ViewModels.IndexViewModel
+
+@{
+    Layout = "Layout";
+}
+<section class="hero">
+    <div class="hero-content">
+        <h2>Explora la riqueza de las civilizaciones antiguas de México</h2>
+        <p>Descubre dioses, mitos y leyendas que han perdurado por siglos</p>
+        <a href="~/Home/Civilizaciones" class="btn">Conocer civilizaciones</a>
+    </div>
+</section>
+
+<section class="accesos">
+    <h2>Explora las mitologias de estas civilizaciones</h2>
+    <!-- Mostrar 3 civilizaciones al azar -->
+    <div class="cards">
+       
+        @foreach (var civ in Model.CivilizacionesIndex)
+        { 
+            <div class="card">
+                <h3>@civ.Nombre</h3>
+                <p>@civ.Descripcion</p>
+                <a href="~/Home/Dioses/?civilizacion=@civ.Nombre" class="btn">Ver detalles</a>
+            </div>  
+        }
+    </div>
+</section>
+
+<footer>
+    <p>Mitología Mexicana | Ejercicio de Programación Web | Resuelto por: Ramiro Valverde</p>
+</footer>
