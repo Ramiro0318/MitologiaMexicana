@@ -1,4 +1,4 @@
-﻿
+﻿@model Mitologia.Models.ViewModels.DiosesViewModel
 @{
     Layout = "Layout";
 }
@@ -9,23 +9,36 @@
         <div class="civilizacion-links">
             <p>Selecciona una civilización para explorar sus deidades:</p>
             <div class="links-container">
-                <a href="dioses.html?civilizacion=mexicas" class="civilizacion-link active">Mexicas</a>
-                <a href="dioses.html?civilizacion=mayas" class="civilizacion-link">Mayas</a>
-                <a href="dioses.html?civilizacion=olmecas" class="civilizacion-link">Olmecas</a>
+                @foreach (var civ in Model.Civilizaciones)
+                {
+                    <a href="~/Home/Dioses/@civ.Nombre" class="civilizacion-link active">@civ.Nombre</a>
+                    @* <a href="~/Home/Dioses/@civ.Nombre" class="civilizacion-link">@civ.Nombre</a> *@
+                    @* Conseguir que el nombre nombre de la civ se obtenga desde la misma consulta*@
+                } @*<a href="~/Home/dioses/@civ.Nombre" class="civilizacion-link">Mayas</a>
+                @* <a href="dioses.html?civilizacion=mayas" class="civilizacion-link">Mayas</a>
+                <a href="dioses.html?civilizacion=olmecas" class="civilizacion-link">Olmecas</a> *@
             </div>
         </div>
 
         <div class="decorative-border"></div>
 
         <div class="dioses-gallery">
-            <div class="dios-item" data-dios-id="1">
-                <div class="dios-mini">
-                    <img src="imagenes/quetzalcoatl_estatua.png" alt="Quetzalcóatl">
-                    <span>Quetzalcóatl</span>
-                </div>
-            </div>
 
-            <div class="dios-item" data-dios-id="2">
+            @foreach (var cd in Model.Civilizaciones)
+            {
+                
+                    
+                    <div class="dios-item" data-dios-id="@cd.Id">
+                        <div class="dios-mini">
+                            <img src="~/imagenes/@(cd.NombreLocal)_estatua.png" alt="@cd.NombreLocal">
+                            <span>@cd.NombreLocal</span>
+                        </div>
+                    </div>
+                
+
+            }
+
+            @* <div class="dios-item" data-dios-id="2">
                 <div class="dios-mini">
                     <img src="imagenes/tezcatlipoca_estatua.png" alt="Tezcatlipoca">
                     <span>Tezcatlipoca</span>
@@ -37,7 +50,7 @@
                     <img src="imagenes/huitzilopochtli_estatua.png" alt="Huitzilopochtli">
                     <span>Huitzilopochtli</span>
                 </div>
-            </div>
+            </div> *@
         </div>
 
         <div class="detalles-container">
@@ -45,26 +58,28 @@
                 <p>Selecciona una civilización y haz clic en un dios para ver sus detalles</p>
             </div>
 
-            <div class="dios-detalles" data-dios-id="1">
-                <div class="detalles-superior">
-                    <img src="imagenes/quetzalcoatl.png" alt="Quetzalcóatl" class="dios-imagen-grande">
-                    <div class="dios-info">
-                        <h3>Quetzalcóatl</h3>
-                        <p><strong>Civilización:</strong> Mexica</p>
-                        <p><strong>Género:</strong> Masculino</p>
-                        <p><strong>Dominio:</strong> Viento, sabiduría, vida</p>
-                        <p><strong>Representación:</strong> Serpiente emplumada</p>
+            @foreach (var dios in Model.Dioses)
+            {
+                <div class="dios-detalles" data-dios-id="@dios.Id">
+                    <div class="detalles-superior">
+                        <img src="~/imagenes/@(dios.NombreGeneral).png" alt="@dios.NombreGeneral" class="dios-imagen-grande">
+                        <div class="dios-info">
+                            <h3>@dios.NombreGeneral</h3>
+                            <p><strong>Civilización:</strong>@Model.NombreCivilizacion</p> @* Consulta de nombre de civ con Id_Civilization*@
+                            <p><strong>Género:</strong>@dios.Genero</p> @* Consulta de genero de dios con IdDios*@
+                            <p><strong>Dominio:</strong>@dios.Dominio</p> @* Consulta de dominio de dios con IdDios*@
+                        @*<p><strong>Representación:</strong>@Model.Dioses.re</p>  Consulta de nombre general de dios con IdDios*@
+                        </div>
+                    </div>
+                    <div class="detalles-inferior">
+                        <div class="dios-descripcion">
+                            <p>@dios.Descripcion</p> @* Consulta de descripcion general de dios con IdDios*@
+                        </div>
                     </div>
                 </div>
-                <div class="detalles-inferior">
-                    <div class="dios-descripcion">
-                        <p>Quetzalcóatl, cuyo nombre significa "serpiente emplumada", era una de las deidades más importantes de la cultura mesoamericana. Representaba la dualidad inherente a la condición humana: la "serpiente" es cuerpo físico con sus limitaciones, y las "plumas" son los principios espirituales.</p>
-                        <p>Era considerado el dios de los vientos y la lluvia, y también el creador del mundo y la humanidad. Además, era el patrono de los sacerdotes y el protector de los artesanos y orfebres.</p>
-                    </div>
-                </div>
-            </div>
+            }
 
-            <div class="dios-detalles" data-dios-id="2">
+            @*             <div class="dios-detalles" data-dios-id="2">
                 <div class="detalles-superior">
                     <img src="imagenes/Tezcatlipoca.png" alt="Tezcatlipoca" class="dios-imagen-grande">
                     <div class="dios-info">
@@ -100,7 +115,7 @@
                         <p>Era el dios que guió a los mexicas durante su migración desde Aztlán hasta el Valle de México. Se le representaba como un guerrero con plumas de colibrí y portando una serpiente de fuego.</p>
                     </div>
                 </div>
-            </div>
+            </div> *@
         </div>
 
         <div class="decorative-border"></div>

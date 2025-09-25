@@ -32,8 +32,6 @@ namespace Mitologia.Models.ViewModels
 
             public string? Descripcion { get; set; }
 
-            //public IEnumerable<Dioses> Dioses { get; set; } = null!;
-
         }
 
     }
