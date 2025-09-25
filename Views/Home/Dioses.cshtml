@@ -23,19 +23,22 @@
         <div class="decorative-border"></div>
 
         <div class="dioses-gallery">
-
-            @foreach (var cd in Model.Civilizaciones)
+            @if (Model.CivilizacionDioses != null)
             {
                 
+                @foreach (var cd in Model.CivilizacionDioses)
+                {
+                
                     
-                    <div class="dios-item" data-dios-id="@cd.Id">
-                        <div class="dios-mini">
-                            <img src="~/imagenes/@(cd.NombreLocal)_estatua.png" alt="@cd.NombreLocal">
-                            <span>@cd.NombreLocal</span>
+                        <div class="dios-item" data-dios-id="@cd.Id">
+                            <div class="dios-mini">
+                                <img src="~/imagenes/@(cd.NombreLocal)_estatua.png" alt="@cd.NombreLocal">
+                                <span>@cd.NombreLocal</span>
+                            </div>
                         </div>
-                    </div>
                 
 
+                }
             }
 
             @* <div class="dios-item" data-dios-id="2">
@@ -58,25 +61,29 @@
                 <p>Selecciona una civilización y haz clic en un dios para ver sus detalles</p>
             </div>
 
-            @foreach (var dios in Model.Dioses)
+            @if (Model.Dioses != null)
             {
-                <div class="dios-detalles" data-dios-id="@dios.Id">
-                    <div class="detalles-superior">
-                        <img src="~/imagenes/@(dios.NombreGeneral).png" alt="@dios.NombreGeneral" class="dios-imagen-grande">
-                        <div class="dios-info">
-                            <h3>@dios.NombreGeneral</h3>
-                            <p><strong>Civilización:</strong>@Model.NombreCivilizacion</p> @* Consulta de nombre de civ con Id_Civilization*@
-                            <p><strong>Género:</strong>@dios.Genero</p> @* Consulta de genero de dios con IdDios*@
-                            <p><strong>Dominio:</strong>@dios.Dominio</p> @* Consulta de dominio de dios con IdDios*@
-                        @*<p><strong>Representación:</strong>@Model.Dioses.re</p>  Consulta de nombre general de dios con IdDios*@
+                
+                @foreach (var dios in Model.Dioses)
+                {
+                    <div class="dios-detalles" data-dios-id="@dios.Id">
+                        <div class="detalles-superior">
+                            <img src="~/imagenes/@(dios.NombreGeneral).png" alt="@dios.NombreGeneral" class="dios-imagen-grande">
+                            <div class="dios-info">
+                                <h3>@dios.NombreGeneral</h3>
+                                <p><strong>Civilización:</strong>@Model.NombreCivilizacion</p> @* Consulta de nombre de civ con Id_Civilization*@
+                                <p><strong>Género:</strong>@dios.Genero</p> @* Consulta de genero de dios con IdDios*@
+                                <p><strong>Dominio:</strong>@dios.Dominio</p> @* Consulta de dominio de dios con IdDios*@
+                            @*<p><strong>Representación:</strong>@Model.Dioses.re</p>  Consulta de nombre general de dios con IdDios*@
+                            </div>
+                        </div>
+                        <div class="detalles-inferior">
+                            <div class="dios-descripcion">
+                                <p>@dios.Descripcion</p> @* Consulta de descripcion general de dios con IdDios*@
+                            </div>
                         </div>
                     </div>
-                    <div class="detalles-inferior">
-                        <div class="dios-descripcion">
-                            <p>@dios.Descripcion</p> @* Consulta de descripcion general de dios con IdDios*@
-                        </div>
-                    </div>
-                </div>
+                }
             }
 
             @*             <div class="dios-detalles" data-dios-id="2">

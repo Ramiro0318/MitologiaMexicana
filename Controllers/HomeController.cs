@@ -6,7 +6,6 @@ using System.Linq;
 using static Mitologia.Models.ViewModels.CivilizacionesViewModel;
 using static Mitologia.Models.ViewModels.DiosesViewModel;
 using static Mitologia.Models.ViewModels.IndexViewModel;
-using CivilizacionModel = Mitologia.Models.ViewModels.DiosesViewModel.CivilizacionModel;
 
 namespace Mitologia.Controllers
 {
@@ -203,36 +202,36 @@ namespace Mitologia.Controllers
 
 
 
-        public IActionResult Dioses(string Id)
-        {
-            MitologiaMexicanaContext context = new();
-            //var datos = context.CivilizacionDios
-            //    .Where(cd => civilizacionNombre == null || cd.IdCivilizacionNavigation.Nombre == civilizacionNombre)
-            //    .Select(cd => new DiosesViewModel.DiosesModel
-            //    {
-            //        Id = cd.IdDios,
-            //        NombreGeneral = cd.IdDiosNavigation.NombreGeneral,
-            //        Genero = cd.IdDiosNavigation.Genero,
-            //        Dominio = cd.IdDiosNavigation.Dominio,
-            //        Descripcion = cd.IdDiosNavigation.Descripcion,
-            //        //NombreLocal = cd.NombreLocal,
-            //        //CivilizacionNombre = cd.IdCivilizacionNavigation.Nombre
-            //    }).ToList();
+        //public IActionResult Dioses(string Id)
+        //{
+        //    MitologiaMexicanaContext context = new();
+        //var datos = context.CivilizacionDios
+        //    .Where(cd => civilizacionNombre == null || cd.IdCivilizacionNavigation.Nombre == civilizacionNombre)
+        //    .Select(cd => new DiosesViewModel.DiosesModel
+        //    {
+        //        Id = cd.IdDios,
+        //        NombreGeneral = cd.IdDiosNavigation.NombreGeneral,
+        //        Genero = cd.IdDiosNavigation.Genero,
+        //        Dominio = cd.IdDiosNavigation.Dominio,
+        //        Descripcion = cd.IdDiosNavigation.Descripcion,
+        //        //NombreLocal = cd.NombreLocal,
+        //        //CivilizacionNombre = cd.IdCivilizacionNavigation.Nombre
+        //    }).ToList();
 
-            //var vm = new DiosesViewModel
-            //{
-            //    Civilizaciones = context.Civilizaciones
-            //        .Select(c => new DiosesViewModel.CivilizacionModel
-            //        {
-            //            IdCivilizacion = c.IdCivilizacion,
-            //            Nombre = c.Nombre
-            //        }).ToList(),
+        //var vm = new DiosesViewModel
+        //{
+        //    Civilizaciones = context.Civilizaciones
+        //        .Select(c => new DiosesViewModel.CivilizacionModel
+        //        {
+        //            IdCivilizacion = c.IdCivilizacion,
+        //            Nombre = c.Nombre
+        //        }).ToList(),
 
-            //    Dioses = datos,
-            //    Seleccionado = diosId.HasValue ? datos.FirstOrDefault(d => d.Id == diosId.Value) : null
-            //};
+        //    Dioses = datos,
+        //    Seleccionado = diosId.HasValue ? datos.FirstOrDefault(d => d.Id == diosId.Value) : null
+        //};
 
-            //return View(vm);
+        //return View(vm);
 
         //    var vm = new DiosesViewModel();
         //    var civilizacionesConDioses = context.Civilizaciones
@@ -281,43 +280,108 @@ namespace Mitologia.Controllers
 
 
 
-            DiosesViewModel vm = new();
 
 
-            vm.Civilizaciones = context.Civilizaciones.Include(a => a.CivilizacionDios).Select(x => new CivilizacionModel
-            {
-                IdCivilizacion = x.IdCivilizacion,
-                Nombre = x.Nombre,
-                CivilizacionDioses = x.CivilizacionDios.Select(d => new CivilizacionDiosModel
+        // Por algun motivo no obtiene los datos correctamente, pero no me permite mostrarlos
+        //DiosesViewModel vm = new();
+
+
+        //var vm = context.Civilizaciones.Select(x => new Models.ViewModels.CivilizacionModel
+        //{
+        //   IdCivilizacion = x.IdCivilizacion,
+        //   Nombre = x.Nombre,
+        //   CivilizacionDioses = x.CivilizacionDios.Select(d => new CivilizacionDiosModel
+        //   {
+        //       Id = d.Id,
+        //       IdCivilizacion = d.IdCivilizacion,
+        //       IdDios = d.IdDios,
+        //       NombreLocal = d.NombreLocal,
+        //       //Dioses = context.Dioses.Select(z => new DiosesModel
+        //       //{
+        //       //    Id = z.Id,
+        //       //    NombreGeneral = z.NombreGeneral,
+        //       //    Genero = z.Genero,
+        //       //    Dominio = z.Dominio,
+        //       //    Descripcion = z.Descripcion,
+        //       //})
+        //   }),
+        //    Dioses = x.CivilizacionDios.Select(d => new DiosesModel
+        //    {
+        //        Id = d.IdDiosNavigation.Id,
+        //        NombreGeneral = d.IdDiosNavigation.NombreGeneral,
+        //        Genero = d.IdDiosNavigation.Genero,
+        //        Dominio = d.IdDiosNavigation.Dominio,
+        //        Descripcion = d.IdDiosNavigation.Descripcion,
+        //    })
+        //});
+
+
+
+
+
+        //return View(vm);
+        //}
+
+        public IActionResult Dioses(string? Id)
+        {
+            MitologiaMexicanaContext context = new();
+
+            // Una sola consulta que trae todo lo necesario
+            var data = context.Civilizaciones
+                .Select(c => new
                 {
-                    Id = d.Id,
-                    IdCivilizacion = d.IdCivilizacion,
-                    IdDios = d.IdDios,
-                    NombreLocal = d.NombreLocal,
-                    Dioses = context.Dioses.Select(z => new DiosesModel
+                    c.IdCivilizacion,
+                    c.Nombre,
+                    Dioses = c.CivilizacionDios.Select(cd => new
                     {
-                        Id = z.Id,
-                        NombreGeneral = z.NombreGeneral,
-                        Genero = z.Genero,
-                        Dominio = z.Dominio,
-                        Descripcion = z.Descripcion,
+                        cd.Id,
+                        cd.NombreLocal,
+                        //cd.IdDiosNavigation.Id,
+                        cd.IdDiosNavigation.NombreGeneral,
+                        cd.IdDiosNavigation.Genero,
+                        cd.IdDiosNavigation.Dominio,
+                        cd.IdDiosNavigation.Descripcion
                     })
-                }),
-                Dioses = x.CivilizacionDios.Select(d => new DiosesModel
-                {
-                    Id = d.IdDiosNavigation.Id,
-                    NombreGeneral = d.IdDiosNavigation.NombreGeneral,
-                    Genero = d.IdDiosNavigation.Genero,
-                    Dominio = d.IdDiosNavigation.Dominio,
-                    Descripcion = d.IdDiosNavigation.Descripcion,
                 })
-            });
-            
+                .ToList();
 
+            var vm = new DiosesViewModel
+            {
+                Civilizaciones = data.Select(c => new Models.ViewModels.CivilizacionModel
+                {
+                    IdCivilizacion = c.IdCivilizacion,
+                    Nombre = c.Nombre
+                })
+            };
 
+            //if (!string.IsNullOrEmpty(Id))
+            {
+                var civ = data.FirstOrDefault(c => c.Nombre == Id);
+                if (civ != null)
+                {
+                    vm.NombreCivilizacion = civ.Nombre;
 
+                    vm.CivilizacionDioses = civ.Dioses.Select(cd => new CivilizacionDiosModel
+                    {
+                        Id = cd.Id,
+                        NombreLocal = cd.NombreLocal
+                    });
+
+                    vm.Dioses = civ.Dioses.Select(cd => new DiosesModel
+                    {
+                        Id = cd.Id,
+                        NombreGeneral = cd.NombreGeneral,
+                        Genero = cd.Genero,
+                        Dominio = cd.Dominio,
+                        Descripcion = cd.Descripcion
+                    });
+                }
+            }
 
             return View(vm);
         }
+
+
+
     }
 }

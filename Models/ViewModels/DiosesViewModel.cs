@@ -7,10 +7,10 @@ namespace Mitologia.Models.ViewModels
         public int IdCivilizacion { get; set; }
         public string NombreCivilizacion { get; set; } = null!;
         public IEnumerable<CivilizacionModel> Civilizaciones { get; set; } = null!;
-        public IEnumerable<DiosesModel> Dioses { get; set; } = null!;
-        public IEnumerable<CivilizacionDiosModel> CivilizacionDioses { get; set; } = null!;
+        public IEnumerable<CivilizacionDiosModel>? CivilizacionDioses { get; set; }
+        public IEnumerable<DiosesModel>? Dioses { get; set; }
 
-    
+    }
 
     public class CivilizacionDiosModel
         {
@@ -37,10 +37,8 @@ namespace Mitologia.Models.ViewModels
             public string? Genero { get; set; }
             public string? Dominio { get; set; }
             public string? Descripcion { get; set; }
-            //public virtual Civilizaciones IdCivilizacionNavigation { get; set; } = null!;
-            //public virtual Dioses IdDiosNavigation { get; set; } = null!;
 
         }
-    }
+    
 
 }
