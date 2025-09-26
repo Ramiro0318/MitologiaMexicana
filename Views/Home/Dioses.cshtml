@@ -11,12 +11,9 @@
             <div class="links-container">
                 @foreach (var civ in Model.Civilizaciones)
                 {
-                    <a href="~/Home/Dioses/@civ.Nombre" class="civilizacion-link active">@civ.Nombre</a>
-                    @* <a href="~/Home/Dioses/@civ.Nombre" class="civilizacion-link">@civ.Nombre</a> *@
-                    @* Conseguir que el nombre nombre de la civ se obtenga desde la misma consulta*@
-                } @*<a href="~/Home/dioses/@civ.Nombre" class="civilizacion-link">Mayas</a>
-                @* <a href="dioses.html?civilizacion=mayas" class="civilizacion-link">Mayas</a>
-                <a href="dioses.html?civilizacion=olmecas" class="civilizacion-link">Olmecas</a> *@
+                    <a href="~/Home/Dioses/@civ.Nombre" class="civilizacion-link active">@civ.Nombre</a>  
+                } 
+
             </div>
         </div>
 
@@ -28,32 +25,16 @@
                 
                 @foreach (var cd in Model.CivilizacionDioses)
                 {
-                
-                    
-                        <div class="dios-item" data-dios-id="@cd.Id">
-                            <div class="dios-mini">
-                                <img src="~/imagenes/@(cd.NombreLocal)_estatua.png" alt="@cd.NombreLocal">
-                                <span>@cd.NombreLocal</span>
-                            </div>
+ 
+                    <div class="dios-item" data-dios-id="@cd.Id">
+                        <div class="dios-mini">
+                            <img src="~/imagenes/@(cd.NombreLocal)_estatua.png" alt="@cd.NombreLocal">
+                            <span>@cd.NombreLocal</span>
                         </div>
-                
+                    </div>
 
                 }
             }
-
-            @* <div class="dios-item" data-dios-id="2">
-                <div class="dios-mini">
-                    <img src="imagenes/tezcatlipoca_estatua.png" alt="Tezcatlipoca">
-                    <span>Tezcatlipoca</span>
-                </div>
-            </div>
-
-            <div class="dios-item" data-dios-id="3">
-                <div class="dios-mini">
-                    <img src="imagenes/huitzilopochtli_estatua.png" alt="Huitzilopochtli">
-                    <span>Huitzilopochtli</span>
-                </div>
-            </div> *@
         </div>
 
         <div class="detalles-container">
@@ -71,58 +52,20 @@
                             <img src="~/imagenes/@(dios.NombreGeneral).png" alt="@dios.NombreGeneral" class="dios-imagen-grande">
                             <div class="dios-info">
                                 <h3>@dios.NombreGeneral</h3>
-                                <p><strong>Civilización:</strong>@Model.NombreCivilizacion</p> @* Consulta de nombre de civ con Id_Civilization*@
-                                <p><strong>Género:</strong>@dios.Genero</p> @* Consulta de genero de dios con IdDios*@
-                                <p><strong>Dominio:</strong>@dios.Dominio</p> @* Consulta de dominio de dios con IdDios*@
-                            @*<p><strong>Representación:</strong>@Model.Dioses.re</p>  Consulta de nombre general de dios con IdDios*@
+                                <p><strong>Civilización:</strong>@Model.NombreCivilizacion</p> 
+                                <p><strong>Género:</strong>@dios.Genero</p> 
+                                <p><strong>Dominio:</strong>@dios.Dominio</p> 
                             </div>
                         </div>
                         <div class="detalles-inferior">
                             <div class="dios-descripcion">
-                                <p>@dios.Descripcion</p> @* Consulta de descripcion general de dios con IdDios*@
+                                <p>@dios.Descripcion</p> 
                             </div>
                         </div>
                     </div>
                 }
             }
 
-            @*             <div class="dios-detalles" data-dios-id="2">
-                <div class="detalles-superior">
-                    <img src="imagenes/Tezcatlipoca.png" alt="Tezcatlipoca" class="dios-imagen-grande">
-                    <div class="dios-info">
-                        <h3>Tezcatlipoca</h3>
-                        <p><strong>Civilización:</strong> Mexica</p>
-                        <p><strong>Género:</strong> Masculino</p>
-                        <p><strong>Dominio:</strong> Noche, destino, magia</p>
-                        <p><strong>Representación:</strong> Espejo humeante</p>
-                    </div>
-                </div>
-                <div class="detalles-inferior">
-                    <div class="dios-descripcion">
-                        <p>Tezcatlipoca, cuyo nombre significa "espejo humeante", era una deidad central en la religión mexica. Era asociado con una amplia gama de conceptos incluyendo la noche, el cielo, la tentación, la guerra, el conflicto y el destino.</p>
-                        <p>Era considerado un dios omnipotente, capaz de conocer los pensamientos y los corazones de las personas. Se le representaba con un espejo de obsidiana en el pie, que sustituía el que había perdido en una lucha con el monstruo de la tierra.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="dios-detalles" data-dios-id="3">
-                <div class="detalles-superior">
-                    <img src="imagenes/Huitzilopochtli.png" alt="Huitzilopochtli" class="dios-imagen-grande">
-                    <div class="dios-info">
-                        <h3>Huitzilopochtli</h3>
-                        <p><strong>Civilización:</strong> Mexica</p>
-                        <p><strong>Género:</strong> Masculino</p>
-                        <p><strong>Dominio:</strong> Guerra, sol</p>
-                        <p><strong>Representación:</strong> Colibrí zurdo</p>
-                    </div>
-                </div>
-                <div class="detalles-inferior">
-                    <div class="dios-descripcion">
-                        <p>Huitzilopochtli, cuyo nombre significa "colibrí zurdo", era la deidad patrona de los mexicas y dios de la guerra y el sol. Según la mitología, nació adulto y fully armado de su madre Coatlicue.</p>
-                        <p>Era el dios que guió a los mexicas durante su migración desde Aztlán hasta el Valle de México. Se le representaba como un guerrero con plumas de colibrí y portando una serpiente de fuego.</p>
-                    </div>
-                </div>
-            </div> *@
         </div>
 
         <div class="decorative-border"></div>
