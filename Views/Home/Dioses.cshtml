@@ -11,8 +11,15 @@
             <div class="links-container">
                 @foreach (var civ in Model.Civilizaciones)
                 {
-                    <a href="~/Home/Dioses/@civ.Nombre" class="civilizacion-link active">@civ.Nombre</a>  
-                } 
+                    if (civ.Nombre == Model.NombreCivilizacion)
+                    {
+                        <a href="~/Home/Dioses/@civ.Nombre" class="civilizacion-link active">@civ.Nombre</a>
+                    }
+                    else
+                    {
+                        <a href="~/Home/Dioses/@civ.Nombre" class="civilizacion-link">@civ.Nombre</a> 
+                    }
+                }
 
             </div>
         </div>
@@ -22,10 +29,10 @@
         <div class="dioses-gallery">
             @if (Model.CivilizacionDioses != null)
             {
-                
+
                 @foreach (var cd in Model.CivilizacionDioses)
                 {
- 
+
                     <div class="dios-item" data-dios-id="@cd.Id">
                         <div class="dios-mini">
                             <img src="~/imagenes/@(cd.NombreLocal)_estatua.png" alt="@cd.NombreLocal">
@@ -44,7 +51,7 @@
 
             @if (Model.Dioses != null)
             {
-                
+
                 @foreach (var dios in Model.Dioses)
                 {
                     <div class="dios-detalles" data-dios-id="@dios.Id">
@@ -52,14 +59,14 @@
                             <img src="~/imagenes/@(dios.NombreGeneral).png" alt="@dios.NombreGeneral" class="dios-imagen-grande">
                             <div class="dios-info">
                                 <h3>@dios.NombreGeneral</h3>
-                                <p><strong>Civilización:</strong>@Model.NombreCivilizacion</p> 
-                                <p><strong>Género:</strong>@dios.Genero</p> 
-                                <p><strong>Dominio:</strong>@dios.Dominio</p> 
+                                <p><strong>Civilización:</strong>@Model.NombreCivilizacion</p>
+                                <p><strong>Género:</strong>@dios.Genero</p>
+                                <p><strong>Dominio:</strong>@dios.Dominio</p>
                             </div>
                         </div>
                         <div class="detalles-inferior">
                             <div class="dios-descripcion">
-                                <p>@dios.Descripcion</p> 
+                                <p>@dios.Descripcion</p>
                             </div>
                         </div>
                     </div>
