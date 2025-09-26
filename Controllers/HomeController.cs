@@ -78,6 +78,7 @@ namespace Mitologia.Controllers
                 })
             }).ToList();
 
+            var civ = string.IsNullOrEmpty(Id) ? data.OrderBy(c => c.IdCivilizacion).FirstOrDefault() : data.FirstOrDefault(c => c.Nombre == Id);
             var vm = new DiosesViewModel
             {
                 Civilizaciones = data.Select(c => new Models.ViewModels.CivilizacionModel
@@ -87,7 +88,6 @@ namespace Mitologia.Controllers
                 })
             };
 
-            var civ = data.FirstOrDefault(c => c.Nombre == Id);
             if (civ != null)
             {
                 vm.NombreCivilizacion = civ.Nombre;
